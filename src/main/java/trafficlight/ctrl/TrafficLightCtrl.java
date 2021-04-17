@@ -1,9 +1,16 @@
+//Subjekt muss die Gui informieren wenn sich was ändert,
+//schickt also updates raus und gui zeichnet neu
+//oder TrafficLight von mir aus
 package trafficlight.ctrl;
 
+import trafficlight.Subject;
+import trafficlight.gui.TrafficLight;
 import trafficlight.gui.TrafficLightGui;
 import trafficlight.states.State;
 
-public class TrafficLightCtrl {
+import java.awt.*;
+
+public class TrafficLightCtrl extends Subject {
 
     private State greenState;
 
@@ -25,6 +32,7 @@ public class TrafficLightCtrl {
         gui = new TrafficLightGui(this);
         gui.setVisible(true);
         //TODO useful to update the current state
+
     }
 
     private void initStates() {
@@ -32,9 +40,11 @@ public class TrafficLightCtrl {
             @Override
             public State getNextState() {
                 previousState = currentState;
+                notifyObservers(currentState);
                 //TODO useful to update the current state and the old one
                 return yellowState;
             }
+
             @Override
             public String getColor() {
                 return "green";
@@ -45,9 +55,12 @@ public class TrafficLightCtrl {
             @Override
             public State getNextState() {
                 previousState = currentState;
+                notifyObservers(currentState);
+
                 //TODO useful to update the current state and the old one
                 return yellowState;
             }
+
             @Override
             public String getColor() {
                 return "red";
@@ -59,14 +72,20 @@ public class TrafficLightCtrl {
             public State getNextState() {
                 if (previousState.equals(greenState)) {
                     previousState = currentState;
+                    notifyObservers(currentState);
+
+
                     //TODO useful to update the current state and the old one
                     return redState;
-                }else {
+                } else {
                     previousState = currentState;
+                    notifyObservers(currentState);
+
                     //TODO useful to update the current state and the old one
                     return greenState;
                 }
             }
+
             @Override
             public String getColor() {
                 return "yellow";
@@ -88,7 +107,7 @@ public class TrafficLightCtrl {
         return yellowState;
     }
 
-    public void run()  {
+    public void run() {
         int intervall = 1500;
         while (doRun) {
             try {

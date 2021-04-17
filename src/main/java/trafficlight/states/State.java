@@ -2,7 +2,11 @@ package trafficlight.states;
 
 //TODO implement a part of the pattern here
 
-public abstract class State {
+import trafficlight.Subject;
+import trafficlight.gui.TrafficLight;
+import trafficlight.gui.TrafficLightGui;
+
+public abstract class State{
 
     public abstract State getNextState();
 
@@ -11,4 +15,6 @@ public abstract class State {
     public String getSting(){
         return getColor();
     }
+
+
 }

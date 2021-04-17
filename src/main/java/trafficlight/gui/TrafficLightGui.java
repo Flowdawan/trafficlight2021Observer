@@ -1,13 +1,16 @@
 package trafficlight.gui;
 
+import trafficlight.Observer;
+import trafficlight.Subject;
 import trafficlight.ctrl.TrafficLightCtrl;
+import trafficlight.states.State;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class TrafficLightGui extends JFrame implements ActionListener {
+public class TrafficLightGui extends JFrame implements ActionListener, Observer {
 
     public static final String ACTION_COMMAND_STOP = "stop";
 
@@ -34,6 +37,9 @@ public class TrafficLightGui extends JFrame implements ActionListener {
         red = new TrafficLight(Color.red);
         green = new TrafficLight(Color.green);
         yellow = new TrafficLight(Color.yellow);
+
+        this.trafficLightCtrl.addObserver(this);
+
         //create the TrafficLight
         //connect subject and observer
     }
@@ -48,6 +54,7 @@ public class TrafficLightGui extends JFrame implements ActionListener {
         p1.add(red);
         p1.add(yellow);
         p1.add(green);
+
 
 
         JPanel p2 = new JPanel(new FlowLayout());
@@ -68,6 +75,24 @@ public class TrafficLightGui extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e){
         if (ACTION_COMMAND_STOP.equals(e.getActionCommand())){
            trafficLightCtrl.stop();
+        }
+    }
+
+    @Override
+    public void update(State o) {
+
+        if (o.getColor() == "green") {
+            green.turnOn(true);
+            red.turnOn(false);
+            yellow.turnOn(false);
+        } else if (o.getColor() == "red") {
+            red.turnOn(true);
+            green.turnOn(false);
+            yellow.turnOn(false);
+        } else {
+            yellow.turnOn(true);
+            green.turnOn(false);
+            red.turnOn(false);
         }
     }
 }

@@ -1,6 +1,11 @@
 package trafficlight.gui;
 
 
+import trafficlight.Observer;
+import trafficlight.Subject;
+import trafficlight.ctrl.TrafficLightCtrl;
+import trafficlight.states.State;
+
 import java.awt.*;
 
 public class TrafficLight extends Light {
@@ -17,6 +22,8 @@ public class TrafficLight extends Light {
     public boolean isOn() {
         return isOn;
     }
+
+
 
     //TODO implement a part of the pattern here
 }
