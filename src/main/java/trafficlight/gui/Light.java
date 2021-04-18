@@ -10,24 +10,24 @@ class Light extends JPanel {
     int border = 10;
     boolean isOn = false;
 
-    Light(Color color){
+    Light(Color color) {
         on = color;
     }
 
-    public Dimension getPreferredSize(){
-        int size = (radius+border)*2;
-        return new Dimension( size, size );
+    public Dimension getPreferredSize() {
+        int size = (radius + border) * 2;
+        return new Dimension(size, size);
     }
 
-    public void paintComponent(Graphics g){
-        g.setColor( Color.black );
-        g.fillRect(0,0,getWidth(),getHeight());
+    public void paintComponent(Graphics g) {
+        g.setColor(Color.black);
+        g.fillRect(0, 0, getWidth(), getHeight());
 
-        if (isOn){
-            g.setColor( on );
+        if (isOn) {
+            g.setColor(on);
         } else {
-            g.setColor( on.darker().darker().darker() );
+            g.setColor(on.darker().darker().darker());
         }
-        g.fillOval( border,border,2*radius,2*radius );
+        g.fillOval(border, border, 2 * radius, 2 * radius);
     }
 }

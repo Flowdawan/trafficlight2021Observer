@@ -18,6 +18,7 @@ public class TrafficLight extends Light {
         isOn = a;
         repaint();
     }
+
     public boolean isOn() {
         return isOn;
     }
