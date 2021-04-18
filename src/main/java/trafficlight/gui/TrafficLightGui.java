@@ -80,12 +80,11 @@ public class TrafficLightGui extends JFrame implements ActionListener, Observer 
 
     @Override
     public void update(State o) {
-
-        if (o.getColor() == "green") {
+        if (o.getColor().equals("green")) {
             green.turnOn(true);
             red.turnOn(false);
             yellow.turnOn(false);
-        } else if (o.getColor() == "red") {
+        } else if (o.getColor().equals("red")) {
             red.turnOn(true);
             green.turnOn(false);
             yellow.turnOn(false);

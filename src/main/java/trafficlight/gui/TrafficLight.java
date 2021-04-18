@@ -18,11 +18,9 @@ public class TrafficLight extends Light {
         isOn = a;
         repaint();
     }
-
     public boolean isOn() {
         return isOn;
     }
-
 
 
     //TODO implement a part of the pattern here

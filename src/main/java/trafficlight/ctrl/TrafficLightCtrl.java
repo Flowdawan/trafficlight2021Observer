@@ -1,8 +1,6 @@
-//Subjekt muss die Gui informieren wenn sich was ändert,
-//schickt also updates raus und gui zeichnet neu
-//oder TrafficLight von mir aus
 package trafficlight.ctrl;
 
+import com.google.inject.Singleton;
 import trafficlight.Subject;
 import trafficlight.gui.TrafficLight;
 import trafficlight.gui.TrafficLightGui;
@@ -26,13 +24,19 @@ public class TrafficLightCtrl extends Subject {
 
     private boolean doRun = true;
 
-    public TrafficLightCtrl() {
+    private static final TrafficLightCtrl OBJ = new TrafficLightCtrl();
+
+    private TrafficLightCtrl() {
         super();
         initStates();
         gui = new TrafficLightGui(this);
         gui.setVisible(true);
         //TODO useful to update the current state
+        notifyObservers(currentState);
+    }
 
+    public static TrafficLightCtrl getInstance() {
+        return OBJ;
     }
 
     private void initStates() {
@@ -73,14 +77,11 @@ public class TrafficLightCtrl extends Subject {
                 if (previousState.equals(greenState)) {
                     previousState = currentState;
                     notifyObservers(currentState);
-
-
                     //TODO useful to update the current state and the old one
                     return redState;
                 } else {
                     previousState = currentState;
                     notifyObservers(currentState);
-
                     //TODO useful to update the current state and the old one
                     return greenState;
                 }
