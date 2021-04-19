@@ -1,7 +1,5 @@
 package trafficlight.gui;
 
-import trafficlight.Observer;
-import trafficlight.Subject;
 import trafficlight.ctrl.TrafficLightCtrl;
 import trafficlight.states.State;
 

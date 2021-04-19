@@ -1,12 +1,9 @@
 package trafficlight.ctrl;
 
-import com.google.inject.Singleton;
-import trafficlight.Subject;
-import trafficlight.gui.TrafficLight;
+
 import trafficlight.gui.TrafficLightGui;
 import trafficlight.states.State;
 
-import java.awt.*;
 
 public class TrafficLightCtrl{
 
