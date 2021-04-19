@@ -8,7 +8,7 @@ import trafficlight.states.State;
 
 import java.awt.*;
 
-public class TrafficLightCtrl extends Subject {
+public class TrafficLightCtrl{
 
     private State greenState;
 
@@ -32,7 +32,8 @@ public class TrafficLightCtrl extends Subject {
         gui = new TrafficLightGui(this);
         gui.setVisible(true);
         //TODO useful to update the current state
-        notifyObservers(currentState);
+        greenState.notifyObservers(currentState);
+        //notifyObservers(currentState);
     }
 
     public static TrafficLightCtrl getInstance() {
@@ -44,7 +45,7 @@ public class TrafficLightCtrl extends Subject {
             @Override
             public State getNextState() {
                 previousState = currentState;
-                notifyObservers(currentState);
+                notifyObservers(this);
                 //TODO useful to update the current state and the old one
                 return yellowState;
             }
@@ -54,12 +55,11 @@ public class TrafficLightCtrl extends Subject {
                 return "green";
             }
         };
-
         redState = new State() {
             @Override
             public State getNextState() {
                 previousState = currentState;
-                notifyObservers(currentState);
+                notifyObservers(this);
 
                 //TODO useful to update the current state and the old one
                 return yellowState;
@@ -76,12 +76,12 @@ public class TrafficLightCtrl extends Subject {
             public State getNextState() {
                 if (previousState.equals(greenState)) {
                     previousState = currentState;
-                    notifyObservers(currentState);
+                    notifyObservers(this);
                     //TODO useful to update the current state and the old one
                     return redState;
                 } else {
                     previousState = currentState;
-                    notifyObservers(currentState);
+                    notifyObservers(this);
                     //TODO useful to update the current state and the old one
                     return greenState;
                 }

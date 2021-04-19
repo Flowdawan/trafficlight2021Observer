@@ -10,7 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class TrafficLightGui extends JFrame implements ActionListener, Observer {
+public class TrafficLightGui extends JFrame implements ActionListener {
 
     public static final String ACTION_COMMAND_STOP = "stop";
 
@@ -23,6 +23,8 @@ public class TrafficLightGui extends JFrame implements ActionListener, Observer 
     private TrafficLight red = null;
 
     private TrafficLightCtrl trafficLightCtrl = null;
+
+    private State state = null;
 
 
     public TrafficLightGui(TrafficLightCtrl ctrl){
@@ -38,7 +40,11 @@ public class TrafficLightGui extends JFrame implements ActionListener, Observer 
         green = new TrafficLight(Color.green);
         yellow = new TrafficLight(Color.yellow);
 
-        this.trafficLightCtrl.addObserver(this);
+
+        ctrl.getGreenState().addObserver(green);
+        ctrl.getRedState().addObserver(red);
+        ctrl.getYellowState().addObserver(yellow);
+
 
         //create the TrafficLight
         //connect subject and observer
@@ -78,20 +84,4 @@ public class TrafficLightGui extends JFrame implements ActionListener, Observer 
         }
     }
 
-    @Override
-    public void update(State o) {
-        if (o.getColor().equals("green")) {
-            green.turnOn(true);
-            red.turnOn(false);
-            yellow.turnOn(false);
-        } else if (o.getColor().equals("red")) {
-            red.turnOn(true);
-            green.turnOn(false);
-            yellow.turnOn(false);
-        } else {
-            yellow.turnOn(true);
-            green.turnOn(false);
-            red.turnOn(false);
-        }
-    }
 }

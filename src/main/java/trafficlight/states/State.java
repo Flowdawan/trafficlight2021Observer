@@ -6,13 +6,13 @@ import trafficlight.Subject;
 import trafficlight.gui.TrafficLight;
 import trafficlight.gui.TrafficLightGui;
 
-public abstract class State{
+public abstract class State extends Subject{
 
     public abstract State getNextState();
 
     public abstract String getColor();
 
-    public String getSting(){
+    public String getString(){
         return getColor();
     }
 
