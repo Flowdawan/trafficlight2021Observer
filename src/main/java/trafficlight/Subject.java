@@ -1,6 +1,5 @@
 package trafficlight;
 
-import trafficlight.states.State;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +17,9 @@ public class Subject {
         observers.remove(observer);
     }
 
-    public void notifyObservers(State state) {
+    public void notifyObservers() {
         for (Observer observer : observers)
-            observer.update(state);
+            observer.update();
     }
 
 
